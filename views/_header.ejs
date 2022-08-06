@@ -1,0 +1,25 @@
+<header id="header">
+    <div id="app-name">
+        <span><b style="font-family: cursive;">CONNECTI</b></span>
+    </div>
+    <div id="sign-links">
+    <% if(locals.user){  %>
+        <a><b>Welcome,</b>
+            <%= user.name %>!
+        </a>   
+        <a href="/">
+            Home
+         </a>
+        <a href="/users/sign-out">
+           Sign out
+        </a>
+    <% }else{ %>
+        <a href="/users/sign-up" style="padding-right: 20px;">
+            <b>Sign Up</b>
+        </a>
+        <a href="/users/sign-in"style="padding-right: 30px;">
+            <b>Sign In</b> 
+        </a>
+    <% } %>
+    </div>
+</header>

@@ -1,0 +1,72 @@
+<link rel="stylesheet" href="/css/home.css">
+
+<div id="home-container">
+    <section id="feed-posts" <% if(!locals.user) { %> style="background-image: url(https://coverfiles.alphacoders.com/113/113377.jpg);"<% } %> style="background-color: lightskyblue;">
+        <% if(locals.user) { %>
+        <h4>Timeline</h4>
+    
+        
+    
+            <form action="/posts/create" id="new-post-form" method="POST">
+                <textarea name="content"  cols="50" rows="10" placeholder="Type Here..."></textarea>
+                <input type="submit" value="Post">
+            </form>
+    
+        
+    
+        <div id="posts-list-container">
+            <ul>
+                <% for(post of posts) { %>
+                    
+                    <!-- Partials Distribution -->
+                    <%- include('_post') -%>
+    
+                <% } %>
+            </ul>
+        </div>
+
+        <% } %>
+    
+    </section>
+    
+    <!-- profile link on home page -->
+    <section id="user-friends" <% if(!locals.user) { %> style="background-image: url(https://coverfiles.alphacoders.com/113/113377.jpg);"<% } %> style="background-color:lightblue;" >
+        <% if(locals.user) { %>
+        <h4>Friends</h4>
+        <% for(u of all_users) { %>
+            <p>
+                <a href="/users/profile/<%= u.id %>"><%= u.name %></a>
+            </p>
+        <% } %>
+        <% } %>
+    </section>
+
+    <!-- including chat box Partial -->
+    <%- include('_chat_box') -%>
+        
+</div>
+
+<!-- importing  script for creating the comments -->
+<script src="/js/home_post_comments.js" ></script>
+<script src="/js/home_posts.js"></script>
+
+<!--  import  script file for toggle likes, also run it over for the already present posts and comments on the page -->
+<script src="js/toggle_likes.js"></script>
+<script>
+    $('.toggle-like-button').each(function(){
+        let self = this;
+        let toggleLike = new ToggleLike(self);
+    });
+</script>
+
+
+<!-- link for socket from cdn -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+<script src="/js/chat_engine.js"></script>
+
+    <!-- for socket  -->
+    <% if(locals.user) { %>
+        <script>
+            new ChatEngine('user-chat-box','<%= locals.user .email %>');
+        </script>
+    <% } %>

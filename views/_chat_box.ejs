@@ -1,0 +1,43 @@
+
+<link rel="stylesheet" href="/css/chat_box.css">
+
+<% if (locals.user){ %>
+	<!-- corona help chatbot -->
+	<div id="user-chat-box" style=" margin-right: 23%; background-color:#87cefa; height:fit-content; width:fit-content;">
+		<div class="container" id="iframe-container">
+			<div id="chatbox">
+				<iframe
+			allow="microphone;"
+			width="290"
+			height="340"
+			src="https://console.dialogflow.com/api-client/demo/embedded/5437ad34-130b-452b-8a94-00c4061f6011">
+				</iframe>
+			</div>
+		</div>
+	</div>
+	
+	<div id="user-chat-box">
+		<!-- user chatbot -->
+		<ul id="chat-messages-list">
+			<li class="other-message">
+				<span>Other Message</span>
+			</li>
+			<li class="self-message">
+				<span>
+					Self Message
+				</span>
+				
+			</li>
+
+		</ul>
+		
+		<div id="chat-message-input-container">
+			<input id="chat-message-input" placeholder="Type message here">
+			<button id="send-message">Send</button>
+		</div>
+		
+
+	
+	
+
+<% } %>
